@@ -18,13 +18,14 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group(['prefix' => 'api'], function () use ($router){
-    $router->post('/register', 'UserController@store');
+    $router->post('/register', 'AuthController@register');
     $router->post('/login', 'AuthController@login');
     $router->get('class/', 'ClassController@index');
     $router->get('class/{id}', 'ClassController@show');
     $router->get('student/', 'StudentController@index');
     $router->get('student/{id}', 'StudentController@show');
     $router->group(['middleware' => 'auth'], function () use ($router) {
+        $router->post('/logout', 'AuthController@logout');
         $router->group(['prefix' => 'class'], function () use ($router){
             $router->post('/', 'ClassController@store');
             $router->put('/{id}', 'ClassController@update');
