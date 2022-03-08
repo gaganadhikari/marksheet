@@ -21,8 +21,16 @@ $router->group(['prefix' => 'api'], function () use ($router){
 
     $router->group(['prefix' => 'class'], function () use ($router){
         $router->get('/', 'ClassController@index');
+        $router->get('/{id}', 'ClassController@show');
         $router->post('/', 'ClassController@store');
         $router->put('/{id}', 'ClassController@update');
         $router->put('/delete/{id}', 'ClassController@delete');
+    });
+    $router->group(['prefix' => 'student'], function () use ($router){
+        $router->get('/', 'StudentController@index');
+        $router->get('/{id}', 'StudentController@show');
+        $router->post('/', 'StudentController@store');
+        $router->put('/{id}', 'StudentController@update');
+        $router->put('/delete/{id}', 'StudentController@delete');
     });
 });

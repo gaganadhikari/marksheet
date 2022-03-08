@@ -3,18 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\ClassRoom;
-use http\Env\Response;
 use Illuminate\Http\Request;
 
 class ClassController extends Controller
 {
     //
     public function index(){
-        $class = ClassRoom::query()
+        $classes = ClassRoom::query()
         ->select('id','name')
             ->where('deleted_at', NULL)
             ->get();
-        return $class;
+        return $classes;
     }
 
     public function store(Request $request){
@@ -26,6 +25,15 @@ class ClassController extends Controller
         }catch (\Exception $e){
             return Response()->json(['status'=>'error','message'=>$e->getMessage()]);
         }
+    }
+
+    public function show($id){
+        $class = ClassRoom::query()
+            ->select('id','name')
+            ->where('id','=', $id)
+            ->where('deleted_at', NULL)
+            ->get();
+        return $class;
     }
 
     public function update(Request $request, $id){
