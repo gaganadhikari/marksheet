@@ -16,3 +16,13 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['prefix' => 'api'], function () use ($router){
+
+    $router->group(['prefix' => 'class'], function () use ($router){
+        $router->get('/', 'ClassController@index');
+        $router->post('/', 'ClassController@store');
+        $router->put('/{id}', 'ClassController@update');
+        $router->put('/delete/{id}', 'ClassController@delete');
+    });
+});
