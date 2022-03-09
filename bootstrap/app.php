@@ -60,6 +60,7 @@ $app->singleton(
 */
 
 $app->configure('auth');
+$app->configure('dompdf');
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +98,7 @@ $app->configure('auth');
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 $app->register(Laravel\Passport\PassportServiceProvider::class);
 $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
+$app->register(\Barryvdh\DomPDF\ServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

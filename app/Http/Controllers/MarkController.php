@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mark;
 use Illuminate\Http\Request;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 class MarkController extends Controller
 {
     //
@@ -50,6 +50,20 @@ class MarkController extends Controller
         }catch (\Exception $e){
             return Response()->json(['status'=>'error','message'=>$e->getMessage()]);
         }
+    }
+
+    public function getPdf(Request $request){
+        $marks = Mark::query()
+            ->select('classes.name as class', 'students.name as s_name', 'students.address', 'students.registration_no', 'english', 'nepali', 'maths', 'science', 'ehp')
+            ->leftjoin('classes','marks.class_id','=','classes.id')
+            ->leftjoin('students','marks.student_id','=','students.id')
+            ->where('class_id', '=', $request->class)
+            ->where('student_id', '=', $request->student)
+            ->first();
+        $array = json_decode($marks);
+        $arr = (array) $array;
+        $pdf = PDF::loadView('marks',['marks'=>$arr]);
+        return $pdf->download('marks.pdf');
     }
 
 }

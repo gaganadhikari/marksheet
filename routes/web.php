@@ -24,6 +24,7 @@ $router->group(['prefix' => 'api'], function () use ($router){
     $router->get('class/{id}', 'ClassController@show');
     $router->get('student/', 'StudentController@index');
     $router->get('student/{id}', 'StudentController@show');
+    $router->post('marks/result-pdf', 'MarkController@getPdf');
     $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->post('/logout', 'AuthController@logout');
         $router->group(['prefix' => 'class'], function () use ($router){
