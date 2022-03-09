@@ -20,7 +20,7 @@ class CreateStudentsTable extends Migration
             $table->string('address');
             $table->integer('registration_no')->unique();
             $table->String('guardian_name');
-            $table->integer('guardian_no');
+            $table->string('guardian_no');
             $table->timestamps();
             $table->softDeletes();
         });
