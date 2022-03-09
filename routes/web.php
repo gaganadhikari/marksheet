@@ -36,5 +36,10 @@ $router->group(['prefix' => 'api'], function () use ($router){
             $router->put('/{id}', 'StudentController@update');
             $router->put('/delete/{id}', 'StudentController@delete');
         });
+        $router->group(['prefix' => 'marks'], function () use ($router){
+            $router->get('/average/{id}', 'MarkController@average');
+            $router->post('/', 'MarkController@store');
+            $router->put('/{id}', 'MarkController@update');
+        });
     });
 });
